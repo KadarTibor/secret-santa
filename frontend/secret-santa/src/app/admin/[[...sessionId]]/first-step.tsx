@@ -1,4 +1,5 @@
 export default function GroupNameComponent() {
+  
     return (
       <div className="flex justify-center items-center">
         <div className="flex flex-row w-full">
