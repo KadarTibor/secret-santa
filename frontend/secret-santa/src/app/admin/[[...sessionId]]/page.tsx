@@ -1,14 +1,34 @@
 'use client';
-import Image from 'next/image'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GroupNameComponent from './first-step';
+import { useRouter } from 'next/navigation';
+import SessionsService from '../../services/session.service';
 
-export default function AdminPage() {
+const sessionsService = new SessionsService();
+
+export default function AdminPage({ params }: { params: { sessionId: string }}) {
   
+  const router = useRouter();
+
   const steps = 4;
   
+  const [currentSession, setCurrentSession] = useState(null);
   const [currentStep, setCurrentStep] = useState(0);
   
+  useEffect(() => {
+    if (!params.sessionId) {
+      sessionsService.createSession('').then(session => {
+        setCurrentSession(session);
+        router.push('/admin/' + session.id);
+      });
+    } else {
+      sessionsService.getSession(params.sessionId).then(session => {
+        setCurrentSession(session);
+        console.log('current session is', currentSession, session);
+      })
+    }
+  }, [router]);
+
   const handleNext = () => {
     setCurrentStep((prevStep) => (prevStep < steps - 1 ? prevStep + 1 : prevStep));
   };
