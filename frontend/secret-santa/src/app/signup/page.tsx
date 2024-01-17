@@ -2,6 +2,7 @@
 import { useState } from "react";
 import signUp from "@/firebase/auth/signup";
 import { useRouter } from 'next/navigation'
+import { Button } from "@nextui-org/react";
 
 function LoginPage() {
     const [email, setEmail] = useState('')
@@ -17,7 +18,6 @@ function LoginPage() {
             return console.log(error)
         }
 
-        // else successful
         console.log(result)
         return router.push("/admin")
     }
@@ -34,6 +34,7 @@ function LoginPage() {
                     <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
                 </label>
                 <button type="submit">Sign up</button>
+                <Button>Sign up</Button>
             </form>
         </div>
     </div>);
