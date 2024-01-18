@@ -2,7 +2,7 @@
 import { useState } from "react";
 import signUp from "@/firebase/auth/signup";
 import { useRouter } from 'next/navigation'
-import { Button } from "@nextui-org/react";
+import { Button, Card, CardBody, Input } from "@nextui-org/react";
 
 function LoginPage() {
     const [email, setEmail] = useState('')
@@ -21,23 +21,20 @@ function LoginPage() {
         console.log(result)
         return router.push("/admin")
     }
-    return (<div className="wrapper">
-        <div className="form-wrapper">
-            <h1 className="mt-60 mb-30">Sign up</h1>
-            <form onSubmit={handleForm} className="form">
-                <label htmlFor="email">
-                    <p>Email</p>
-                    <input onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" />
-                </label>
-                <label htmlFor="password">
-                    <p>Password</p>
-                    <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
-                </label>
-                <button type="submit">Sign up</button>
-                <Button>Sign up</Button>
-            </form>
+
+    return (
+        <div className="flex justify-center mt-72 content-center w-screen h-screen">
+            <Card className="w-80 h-64">
+                <CardBody>
+                    <form onSubmit={handleForm} className="flex flex-col justify-items-center px-4 py-4" >
+                        <Input className="my-2" type="email" onValueChange={setEmail} variant="bordered" label="Email"/>
+                        <Input className="my-2" type="password" onValueChange={setPassword} variant="bordered" label="Password"/>
+                        <Button className="w-24 my-2" type="submit">Sign up</Button>
+                    </form>
+                </CardBody>
+            </Card>
         </div>
-    </div>);
+    );
 }
 
 export default LoginPage;
