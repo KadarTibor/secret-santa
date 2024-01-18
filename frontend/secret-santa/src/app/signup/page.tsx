@@ -23,8 +23,8 @@ function LoginPage() {
     }
 
     return (
-        <div className="flex justify-center mt-72 content-center w-screen h-screen">
-            <Card className="w-80 h-64">
+        <div className="flex justify-center  content-center w-screen h-screen">
+            <Card className="w-80 h-64 mt-72">
                 <CardBody>
                     <form onSubmit={handleForm} className="flex flex-col justify-items-center px-4 py-4" >
                         <Input className="my-2" type="email" onValueChange={setEmail} variant="bordered" label="Email"/>
