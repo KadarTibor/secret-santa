@@ -18,8 +18,8 @@ function LoginPage() {
             return console.log(error)
         }
 
-        console.log(result)
-        return router.push("/admin")
+        console.log(result);
+        return router.push("/admin");
     }
 
     return (
