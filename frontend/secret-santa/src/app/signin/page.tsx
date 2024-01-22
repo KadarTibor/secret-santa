@@ -2,14 +2,14 @@
 import signIn from "@/firebase/auth/signin";
 import { Button, Card, CardBody, Input } from "@nextui-org/react";
 import { useRouter } from 'next/navigation'
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 function Page() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
 
-    const handleForm = async (event) => {
+    const handleForm = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
         const { result, error } = await signIn(email, password);
