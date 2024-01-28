@@ -1,0 +1,1 @@
+web: backend/santa/target/universal/stage/bin/santa
