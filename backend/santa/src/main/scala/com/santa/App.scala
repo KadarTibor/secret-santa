@@ -22,9 +22,11 @@ import org.http4s.client.blaze.BlazeClientBuilder
 import org.http4s.implicits._
 import org.http4s.server._
 import org.http4s.server.blaze.BlazeServerBuilder
-import org.http4s.server.middleware.CORS
+import org.http4s.server.middleware.CORS.DefaultCORSConfig
+import org.http4s.server.middleware.{CORS, CORSConfig}
 
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.DurationInt
 
 object App extends IOApp {
 
@@ -50,11 +52,6 @@ object App extends IOApp {
   }
 
   private def create(resources: Resources): IO[ExitCode] = {
-    val originConfig = CORSConfig(
-      anyOrigin = false,
-      allowedOrigins = Set("shush-santa.ch"),
-      allowCredentials = false,
-      maxAge = 1.day.toSeconds)
 
     for {
       _ <- Database.initialize(resources.transactor)
@@ -73,10 +70,12 @@ object App extends IOApp {
         new EmailsService(resources.config.mail, resources.httpClient)
       )
       sessionsController = new SessionsController(sessionsService)
-      apis = CORS(
-        Router(
+      apis = CORS(Router(
         "/api" -> allRoutes(sessionsController, participantsController, matchesController),
-      ).orNotFound, originConfig)
+      ).orNotFound, DefaultCORSConfig.copy(
+        anyOrigin = false,
+        allowedOrigins = Set("https://shush-santa.ch")
+      ))
       exitCode <- BlazeServerBuilder[IO](runtime.compute)
         .bindHttp(resources.config.server.port, resources.config.server.host)
         .withHttpApp(apis)
