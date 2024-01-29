@@ -4,7 +4,7 @@
 - deployed on heroku using builpacks:   
     - https://github.com/timanovsky/subdir-heroku-buildpack  
     - heroku/scala
-- deployment happens automatically on pushing to the repository
+- ~~deployment happens automatically on pushing to the repository~~ deployment happens on manual trigger from heroku
 
 **subdir-heroku-buildpack** needed because of the project repo being a monorepo and we need to deploy from a subdirectory. Requires setting the *PROJECT_PATH* 
 
