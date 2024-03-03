@@ -9,7 +9,9 @@
 **subdir-heroku-buildpack** needed because of the project repo being a monorepo and we need to deploy from a subdirectory. Requires setting the *PROJECT_PATH* 
 
 ### Running the project locally
-// todo
+
+Run postgres db instance locally and connect to it via this url:
+- postgresql://postgres:dev-pwd@localhost/postgres?statusColor=686B6F&env=local&name=dev-secret-santa&tLSMode=0&usePrivateKey=false&safeModeLevel=0&advancedSafeModeLevel=0&driverVersion=0&lazyload=false
 
 
 
